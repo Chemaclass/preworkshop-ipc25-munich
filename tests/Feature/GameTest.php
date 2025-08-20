@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace KataTest\Feature;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final  class GameTest extends TestCase
@@ -15,10 +16,10 @@ final  class GameTest extends TestCase
         require __DIR__ . '/../../GameRunner.php';
         $output = ob_get_clean();
 
-        self::assertSame($this->outputResult(), $output);
+        self::assertSame($this->outputResult1(), $output);
     }
 
-    private function outputResult(): string
+    private static function outputResult1(): string
     {
         return <<<'TXT'
 Chet was added
@@ -154,7 +155,7 @@ TXT;
         self::assertSame($this->outputResult2(), $output);
     }
 
-    private function outputResult2(): string
+    private static function outputResult2(): string
     {
         return <<<TXT
 Chet was added
@@ -267,5 +268,23 @@ Pat now has 6 Gold Coins.
 
 TXT;
 
+    }
+
+    #[DataProvider('provideRunner')]
+    public function test_runner(int $seed, string $expected): void
+    {
+        mt_srand($seed);
+
+        ob_start();
+        require __DIR__ . '/../../GameRunner.php';
+        $output = ob_get_clean();
+
+        self::assertSame($expected, $output);
+    }
+
+    public static function provideRunner():iterable
+    {
+        yield [1, self::outputResult1()];;
+        yield [2, self::outputResult2()];;
     }
 }
