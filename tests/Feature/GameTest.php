@@ -8,15 +8,22 @@ use PHPUnit\Framework\TestCase;
 
 final  class GameTest extends TestCase
 {
-    public function test_runner_1(): void
+    #[DataProvider('provideRunner')]
+    public function test_runner(int $seed, string $expected): void
     {
-        mt_srand(1);
+        mt_srand($seed);
 
         ob_start();
-        require __DIR__ . '/../../GameRunner.php';
+        require __DIR__.'/../../GameRunner.php';
         $output = ob_get_clean();
 
-        self::assertSame($this->outputResult1(), $output);
+        self::assertSame($expected, $output);
+    }
+
+    public static function provideRunner(): iterable
+    {
+        yield [1, self::outputResult1()];;
+        yield [2, self::outputResult2()];;
     }
 
     private static function outputResult1(): string
@@ -144,17 +151,6 @@ Chet now has 6 Gold Coins.
 TXT;
     }
 
-    public function test_runner_2(): void
-    {
-        mt_srand(2);
-
-        ob_start();
-        require __DIR__ . '/../../GameRunner.php';
-        $output = ob_get_clean();
-
-        self::assertSame($this->outputResult2(), $output);
-    }
-
     private static function outputResult2(): string
     {
         return <<<TXT
@@ -268,23 +264,5 @@ Pat now has 6 Gold Coins.
 
 TXT;
 
-    }
-
-    #[DataProvider('provideRunner')]
-    public function test_runner(int $seed, string $expected): void
-    {
-        mt_srand($seed);
-
-        ob_start();
-        require __DIR__ . '/../../GameRunner.php';
-        $output = ob_get_clean();
-
-        self::assertSame($expected, $output);
-    }
-
-    public static function provideRunner():iterable
-    {
-        yield [1, self::outputResult1()];;
-        yield [2, self::outputResult2()];;
     }
 }
