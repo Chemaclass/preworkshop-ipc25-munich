@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__.'/Game.php';
+use Kata\Game;
 
 $notAWinner;
 
@@ -24,4 +24,3 @@ $notAWinner;
     
     
   } while ($notAWinner);
-  
