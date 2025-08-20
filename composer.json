@@ -19,5 +19,7 @@
             "email": "chemaclass@outlook.es"
         }
     ],
-    "require": {}
+    "require": {
+      "php": "^8.3"
+    }
 }
