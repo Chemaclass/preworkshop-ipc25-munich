@@ -29,7 +29,8 @@ final  class GameTest extends TestCase
 
     public static function provideRunner(): iterable
     {
-        yield [1];
-        yield [2];
+        foreach(range(1, 10) as $seed) {
+            yield [$seed];
+        }
     }
 }
