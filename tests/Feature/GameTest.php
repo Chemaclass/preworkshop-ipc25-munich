@@ -3,22 +3,42 @@ declare(strict_types=1);
 
 namespace KataTest\Feature;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final  class GameTest extends TestCase
 {
+    #[DataProvider('seedAndExpectedOutput')]
+    public function test_game(int $seed, string $expected): void
+    {
+        mt_srand($seed);
+
+        ob_start();
+        require __DIR__.'/../../GameRunner.php';
+        $output = ob_get_clean();
+
+        self::assertSame($expected, $output);
+    }
+
+    public static function seedAndExpectedOutput(): iterable
+    {
+        yield [1, self::expectedOutput1()];
+        yield [2, self::expectedOutput2()];
+        yield [3, self::expectedOutput3()];
+    }
+
     public function test_game_1(): void
     {
         mt_srand(1);
 
         ob_start();
-        require __DIR__ . '/../../GameRunner.php';
+        require __DIR__.'/../../GameRunner.php';
         $output = ob_get_clean();
 
-        self::assertSame($this->expectedOutput1(), $output);
+        self::assertSame(self::expectedOutput1(), $output);
     }
 
-    public function expectedOutput1(): string
+    public static function expectedOutput1(): string
     {
         return <<<TXT
 Chet was added
@@ -149,13 +169,13 @@ TXT;
         mt_srand(2);
 
         ob_start();
-        require __DIR__ . '/../../GameRunner.php';
+        require __DIR__.'/../../GameRunner.php';
         $output = ob_get_clean();
 
-        self::assertSame($this->expectedOutput2(), $output);
+        self::assertSame(self::expectedOutput2(), $output);
     }
 
-    public function expectedOutput2(): string
+    public static function expectedOutput2(): string
     {
         return <<<TXT
 Chet was added
@@ -275,13 +295,13 @@ TXT;
         mt_srand(3);
 
         ob_start();
-        require __DIR__ . '/../../GameRunner.php';
+        require __DIR__.'/../../GameRunner.php';
         $output = ob_get_clean();
 
-        self::assertSame($this->expectedOutput3(), $output);
+        self::assertSame(self::expectedOutput3(), $output);
     }
 
-    public function expectedOutput3(): string
+    public static function expectedOutput3(): string
     {
         return <<<TXT
 Chet was added
