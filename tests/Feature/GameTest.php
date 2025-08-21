@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 final  class GameTest extends TestCase
 {
-    public function test_game(): void
+    public function test_game_1(): void
     {
         mt_srand(1);
 
@@ -15,10 +15,10 @@ final  class GameTest extends TestCase
         require __DIR__ . '/../../GameRunner.php';
         $output = ob_get_clean();
 
-        self::assertSame($this->expectedOutput(), $output);
+        self::assertSame($this->expectedOutput1(), $output);
     }
 
-    public function expectedOutput(): string
+    public function expectedOutput1(): string
     {
         return <<<TXT
 Chet was added
