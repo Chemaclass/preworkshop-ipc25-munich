@@ -28,7 +28,7 @@ final class GameTest extends TestCase
 
     public static function seedAndExpectedOutput(): iterable
     {
-        foreach (range(1, 10) as $seed) {
+        foreach (range(1, 50) as $seed) {
             yield [$seed];
         }
     }
