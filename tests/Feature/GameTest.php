@@ -6,7 +6,7 @@ namespace KataTest\Feature;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-final  class GameTest extends TestCase
+final class GameTest extends TestCase
 {
     #[DataProvider('seedAndExpectedOutput')]
     public function test_game(int $seed, string $expected): void
@@ -25,17 +25,6 @@ final  class GameTest extends TestCase
         yield [1, self::expectedOutput1()];
         yield [2, self::expectedOutput2()];
         yield [3, self::expectedOutput3()];
-    }
-
-    public function test_game_1(): void
-    {
-        mt_srand(1);
-
-        ob_start();
-        require __DIR__.'/../../GameRunner.php';
-        $output = ob_get_clean();
-
-        self::assertSame(self::expectedOutput1(), $output);
     }
 
     public static function expectedOutput1(): string
@@ -164,17 +153,6 @@ TXT;
 
     }
 
-    public function test_game_2(): void
-    {
-        mt_srand(2);
-
-        ob_start();
-        require __DIR__.'/../../GameRunner.php';
-        $output = ob_get_clean();
-
-        self::assertSame(self::expectedOutput2(), $output);
-    }
-
     public static function expectedOutput2(): string
     {
         return <<<TXT
@@ -288,17 +266,6 @@ Pat now has 6 Gold Coins.
 
 TXT;
 
-    }
-
-    public function test_game_3(): void
-    {
-        mt_srand(3);
-
-        ob_start();
-        require __DIR__.'/../../GameRunner.php';
-        $output = ob_get_clean();
-
-        self::assertSame(self::expectedOutput3(), $output);
     }
 
     public static function expectedOutput3(): string
