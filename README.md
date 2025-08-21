@@ -1,4 +1,4 @@
-# ipc-2025-berlin
+# ipc-2025-munich
 
 > Original kata from https://github.com/caradojo/trivia by jbrains
 
