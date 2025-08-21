@@ -28,8 +28,8 @@ final class GameTest extends TestCase
 
     public static function seedAndExpectedOutput(): iterable
     {
-        yield [1];
-        yield [2];
-        yield [3];
+        foreach (range(1, 10) as $seed) {
+            yield [$seed];
+        }
     }
 }
