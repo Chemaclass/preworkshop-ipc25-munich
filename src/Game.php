@@ -1,4 +1,7 @@
 <?php
+
+namespace Kata;
+
 function echoln($string) {
   echo $string."\n";
 }
